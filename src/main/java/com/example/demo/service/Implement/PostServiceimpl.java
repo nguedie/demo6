@@ -1,21 +1,21 @@
-package com.example.demo.service;
+package com.example.demo.service.Implement;
 
 import com.example.demo.Utilite.Utils;
 import com.example.demo.dto.CreatePostDto;
 import com.example.demo.dto.UpdatePostDto;
 import com.example.demo.model.Post;
 import com.example.demo.repository.PostRepository;
+import com.example.demo.service.Interface.PostService;
 import org.springframework.stereotype.Service;
 
 import java.time.Duration;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import java.util.List;
 import java.util.Optional;
 @Service
 
-public class PostServiceimpl  implements PostService{
+public class PostServiceimpl  implements PostService {
     private final Utils utils;
     private  final PostRepository postRepository;
 
@@ -70,8 +70,8 @@ public class PostServiceimpl  implements PostService{
     }
 
     @Override
-    public Post lire(long id) {
-        var post =  postRepository.findById(id);
+    public Post lire(long postId) {
+        var post =  postRepository.findByPostId(postId);
         return  post;
     }
 

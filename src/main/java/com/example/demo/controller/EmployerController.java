@@ -1,16 +1,16 @@
 package com.example.demo.controller;
 
-import com.example.demo.dto.CreateDepartementDto;
 import com.example.demo.dto.CreateEmployerDto;
 import com.example.demo.dto.UpdateEmployerDto;
 import com.example.demo.model.Employer;
-import com.example.demo.service.EmployerService;
+import com.example.demo.service.Interface.EmployerService;
 
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+
+@CrossOrigin(origins = "*", maxAge=3600)
 @RestController
 @RequestMapping("/employer")
 
@@ -43,7 +43,7 @@ public class EmployerController {
     public List<Employer> read() {
         return employerService.lire();
     }*/
-    @GetMapping("/getEmployerById/{id}")
+    @GetMapping("/{id}")
     public Employer getEmployerById(@PathVariable long id) {
         var result= employerService.lire(id);
         var department= result.getDepartement();

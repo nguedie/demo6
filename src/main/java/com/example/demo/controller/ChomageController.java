@@ -3,12 +3,13 @@ package com.example.demo.controller;
 import com.example.demo.dto.CreateChomageDto;
 import com.example.demo.model.Chomage;
 import com.example.demo.repository.ChomageRepository;
-import com.example.demo.service.ChomageService;
+import com.example.demo.service.Interface.ChomageService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin(origins = "*", maxAge=3600)
 @RestController
 @RequestMapping("/chomage")
 public class ChomageController {

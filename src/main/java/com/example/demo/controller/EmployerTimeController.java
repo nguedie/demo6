@@ -4,8 +4,8 @@ package com.example.demo.controller;
 import com.example.demo.dto.EmployerTimeDto;
 import com.example.demo.model.EmployerTime;
 
-import com.example.demo.service.EmployerService;
-import com.example.demo.service.EmployerTimeService;
+import com.example.demo.service.Interface.EmployerService;
+import com.example.demo.service.Interface.EmployerTimeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 
+@CrossOrigin(origins = "*", maxAge=3600)
 @RestController
 @RequestMapping("/employerTime")
 
@@ -37,15 +38,15 @@ public class EmployerTimeController {
         return employerTimeService.lire(id);
     }
 
-    @GetMapping("/{employerId}/calculateTotalOccupiedTime/{jour}/{congeId}")
-    public ResponseEntity<Long> calculateTotalOccupiedTime(@PathVariable long employerId, @PathVariable @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate jour,@PathVariable long congeId) {
-        Long totalOccupiedTime = employerTimeService.calculateTotalOccupiedTime(employerId, jour,congeId);
+    @GetMapping("/{id}/calculateTotalOccupiedTime/{jour}/{congeId}")
+    public ResponseEntity<Long> calculateTotalOccupiedTime(@PathVariable long id, @PathVariable @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate jour,@PathVariable long congeId) {
+        Long totalOccupiedTime = employerTimeService.calculateTotalOccupiedTime(id, jour,congeId);
         return ResponseEntity.ok(totalOccupiedTime);
     }
 
-    @PutMapping("/{employerId}/jour/{jour}")
-    public ResponseEntity<EmployerTime> updateHeureDepart(@PathVariable long employerId, @PathVariable @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate jour) {
-        EmployerTime employerTime = employerTimeService.updateHeureDepart(employerId, jour);
+    @PutMapping("/{id}/jour/{jour}")
+    public ResponseEntity<EmployerTime> updateHeureDepart(@PathVariable long id, @PathVariable @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate jour) {
+        EmployerTime employerTime = employerTimeService.updateHeureDepart(id, jour);
         if (employerTime != null) {
             return ResponseEntity.ok(employerTime);
         } else {

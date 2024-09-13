@@ -5,5 +5,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface DepartementRepository extends JpaRepository<Departement,Long> {
 
-    Departement findById(long id);
+    Departement findByDepartementId(long departementId);
 }

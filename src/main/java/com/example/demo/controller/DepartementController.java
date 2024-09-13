@@ -3,13 +3,12 @@ package com.example.demo.controller;
 import com.example.demo.dto.CreateDepartementDto;
 import com.example.demo.dto.UpdateDepartementDto;
 import com.example.demo.model.Departement;
-import com.example.demo.model.EmployerTime;
-import com.example.demo.service.DepartementService;
+import com.example.demo.service.Interface.DepartementService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
+@CrossOrigin(origins = "*", maxAge=3600)
 @RestController
 
 @RequestMapping("/departement")

@@ -1,4 +1,4 @@
-package com.example.demo.service;
+package com.example.demo.service.Implement;
 
 import com.example.demo.Utilite.Utils;
 import com.example.demo.dto.CreateCongesDto;
@@ -7,6 +7,7 @@ import com.example.demo.model.Conges;
 import com.example.demo.model.Employer;
 import com.example.demo.repository.CongesRepository;
 import com.example.demo.repository.EmployerRepository;
+import com.example.demo.service.Interface.CongesService;
 import org.springframework.stereotype.Service;
 
 import java.time.Duration;
@@ -16,7 +17,7 @@ import java.util.Optional;
 @Service
 
 
-public class CongesServiceImpl implements CongesService{
+public class CongesServiceImpl implements CongesService {
     private final CongesRepository congesRepository;
     private final Utils utils;
     private final EmployerRepository employerRepository;
@@ -29,7 +30,7 @@ public class CongesServiceImpl implements CongesService{
 
     @Override
     public Conges creer(CreateCongesDto createCongesDto) {
-        Employer employer= employerRepository.findByEmployerId(createCongesDto.getEmployerId())
+        Employer employer= employerRepository.findById(createCongesDto.getEmployerId())
                 .orElseThrow(() -> new RuntimeException("Employer non trouvé"+ createCongesDto.getEmployerId()));
 
         Conges conges=new Conges();
@@ -41,7 +42,7 @@ public class CongesServiceImpl implements CongesService{
         conges.setFinConges(utils.convertStringToLocalDateTime(createCongesDto.getFinConges()));
 
       var result= congesRepository.save(conges);
-        result.getEmployer().setConges(null);
+//        result.getEmployer().setConges(null);
         return  result;
        // return congesRepository.save(conges);
     }

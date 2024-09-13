@@ -1,4 +1,4 @@
-package com.example.demo.service;
+package com.example.demo.service.Interface;
 
 import com.example.demo.dto.CreatePostDto;
 import com.example.demo.dto.UpdatePostDto;
@@ -10,7 +10,7 @@ import java.util.List;
 public interface PostService {
     Post creer(CreatePostDto createPostDto);
 
-    Post lire(long id);
+    Post lire(long postId);
 
     List<Post> lire();
 

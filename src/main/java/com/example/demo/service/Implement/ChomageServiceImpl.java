@@ -1,4 +1,4 @@
-package com.example.demo.service;
+package com.example.demo.service.Implement;
 
 import com.example.demo.Utilite.Utils;
 import com.example.demo.dto.CreateChomageDto;
@@ -6,13 +6,14 @@ import com.example.demo.model.Chomage;
 import com.example.demo.model.Employer;
 import com.example.demo.repository.ChomageRepository;
 import com.example.demo.repository.EmployerRepository;
+import com.example.demo.service.Interface.ChomageService;
 import org.springframework.stereotype.Service;
 
 import java.time.Duration;
 import java.util.List;
 @Service
 
-public class ChomageServiceImpl implements ChomageService{
+public class ChomageServiceImpl implements ChomageService {
     private final ChomageRepository chomageRepository;
     private final EmployerRepository employerRepository;
     private  final Utils utils;
@@ -25,7 +26,7 @@ public class ChomageServiceImpl implements ChomageService{
 
     @Override
     public Chomage creer(CreateChomageDto createChomageDto) {
-        Employer employer=employerRepository.findByEmployerId(createChomageDto.getEmployerId())
+        Employer employer=employerRepository.findById(createChomageDto.getEmployerId())
       .orElseThrow(() -> new RuntimeException("Employer non trouvé"+ createChomageDto.getEmployerId()));
 
       Chomage chomage=new Chomage();
@@ -34,8 +35,9 @@ public class ChomageServiceImpl implements ChomageService{
       chomage.setJour(utils.convertStringToLocalDate(createChomageDto.getJour()));
       chomage.setDebutHeureChomage(utils.convertStringToLocalDateTime(createChomageDto.getDebutHeureChomage()));
       chomage.setFinHeureChomage(utils.convertStringToLocalDateTime(createChomageDto.getFinHeureChomage()));
-      var chamageTooSave = chomageRepository.save(chomage);
-        return chamageTooSave;
+      chomage.setJustification(createChomageDto.getJustification());
+      var chamageToSave = chomageRepository.save(chomage);
+        return chamageToSave;
     }
 
     @Override

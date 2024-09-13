@@ -1,4 +1,4 @@
-package com.example.demo.service;
+package com.example.demo.service.Interface;
 
 import com.example.demo.dto.CreateEmployerDto;
 import com.example.demo.dto.UpdateEmployerDto;
@@ -20,6 +20,7 @@ public interface EmployerService {
     //List<Employer> sortEmployersBySalary(List<Employer> employers);
 
     Employer lire(long id);
+
 
     Employer modifier(long id, UpdateEmployerDto updateEmployerDto);
 

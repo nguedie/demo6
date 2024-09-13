@@ -1,4 +1,4 @@
-package com.example.demo.service;
+package com.example.demo.service.Interface;
 
 import com.example.demo.dto.CreateDepartementDto;
 import com.example.demo.dto.UpdateDepartementDto;
@@ -13,7 +13,7 @@ public interface DepartementService {
 
     List<Departement>lire();
 
-    Departement lire (long id);
+    Departement lire (long departementId);
 
     Departement modifier (long id, UpdateDepartementDto updateDepartementDto);
 

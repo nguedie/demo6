@@ -1,4 +1,4 @@
-package com.example.demo.service;
+package com.example.demo.service.Implement;
 
 import com.example.demo.Utilite.Utils;
 import com.example.demo.dto.CreateEmployerDto;
@@ -13,6 +13,8 @@ import com.example.demo.repository.EmployerRepository;
 
 import com.example.demo.repository.EmployerTimeRepository;
 import com.example.demo.repository.PostRepository;
+import com.example.demo.service.Interface.EmployerService;
+import com.example.demo.service.Interface.PostService;
 import lombok.Data;
 import org.springframework.stereotype.Service;
 
@@ -69,11 +71,11 @@ employer.setPost(post);
            /* var departement = departementRepository.findById(id).orElseThrow(() -> new RuntimeException("Departement not found with id " + id));;
             employer.setDepartement(departement.get());*/
 
-        Optional<Departement> departementOptional = Optional.ofNullable(departementRepository.findById(createEmployerDto.getDepartementId()));
+        Optional<Departement> departementOptional = Optional.ofNullable(departementRepository.findByDepartementId(createEmployerDto.getDepartementId()));
         Departement departement = departementOptional.orElseThrow(() -> new RuntimeException("Departement not found with id " + createEmployerDto.getDepartementId()));
         employer.setDepartement(departement);
 
-        Optional<Post> postOptional = Optional.ofNullable(postRepository.findById(createEmployerDto.getPostId()));
+        Optional<Post> postOptional = Optional.ofNullable(postRepository.findByPostId(createEmployerDto.getPostId()));
         Post post =postOptional.orElseThrow(()-> new RuntimeException("post not found with id"+createEmployerDto.getPostId()));
         employer.setPost(post);
 
@@ -135,9 +137,9 @@ employer.setPost(post);
     @Override
     public Employer lire(long id) {
 
-            var res= employerRepository.findById(id).orElse(null);
+            Employer employer = employerRepository.findById(id).orElseThrow(() -> new NoSuchElementException("Employer not found with id: " + id));
 
-            return res;
+            return employer;
 
     }
 

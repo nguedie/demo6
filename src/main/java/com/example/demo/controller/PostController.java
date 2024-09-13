@@ -4,14 +4,13 @@ import com.example.demo.dto.CreatePostDto;
 import com.example.demo.dto.UpdatePostDto;
 import com.example.demo.model.Post;
 import com.example.demo.repository.PostRepository;
-import com.example.demo.service.PostService;
+import com.example.demo.service.Interface.PostService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 
-import java.time.LocalDateTime;
 import java.util.List;
-
+@CrossOrigin(origins = "*", maxAge=3600)
 @RestController
 
 @RequestMapping("/post")

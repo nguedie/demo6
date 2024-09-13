@@ -1,4 +1,4 @@
-package com.example.demo.service;
+package com.example.demo.service.Implement;
 
 import com.example.demo.dto.CreateDepartementDto;
 import com.example.demo.dto.UpdateDepartementDto;
@@ -6,16 +6,15 @@ import com.example.demo.model.Departement;
 import com.example.demo.model.Employer;
 import com.example.demo.repository.DepartementRepository;
 import com.example.demo.repository.EmployerRepository;
-import org.springframework.data.crossstore.ChangeSetPersister;
+import com.example.demo.service.Interface.DepartementService;
+import com.example.demo.service.Interface.EmployerService;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.Optional;
 
 @Service
-public class DepartementServiceimpl implements DepartementService{
+public class DepartementServiceimpl implements DepartementService {
     private final DepartementRepository departementRepository;
     private final EmployerRepository employerRepository;
 
@@ -68,14 +67,14 @@ public class DepartementServiceimpl implements DepartementService{
     }
 
     @Override
-    public Departement lire(long id) {
-        var Departement= departementRepository.findById(id);
+    public Departement lire(long departementId) {
+        var Departement= departementRepository.findByDepartementId(departementId);
         return Departement;
     }
 
     @Override
     public Departement modifier(long id, UpdateDepartementDto updateDepartementDto) {
-        Departement departement1=departementRepository.findById(id);
+        Departement departement1=departementRepository.findByDepartementId(id);
 
 
             departement1.setNom(updateDepartementDto.getNom());

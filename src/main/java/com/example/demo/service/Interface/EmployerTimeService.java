@@ -1,4 +1,4 @@
-package com.example.demo.service;
+package com.example.demo.service.Interface;
 
 import com.example.demo.dto.EmployerTimeDto;
 import com.example.demo.model.EmployerTime;
@@ -20,9 +20,9 @@ public interface EmployerTimeService {
     List<EmployerTime> lire();
 
    // EmployerTime creerListjustificationDansEmployerTime(EmployerTime employerTime);
-    Long calculateTotalOccupiedTime(long employerId, LocalDate jour,long congesId);
+    Long calculateTotalOccupiedTime(long id, LocalDate jour,long congesId);
 
-   EmployerTime updateHeureDepart(long employerId, LocalDate jour);
+   EmployerTime updateHeureDepart(long id ,LocalDate jour);
 
    String suprimer (long id);
 

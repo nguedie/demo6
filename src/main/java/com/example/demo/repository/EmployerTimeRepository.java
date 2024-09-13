@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import java.time.LocalDate;
 @Repository
 public interface EmployerTimeRepository extends JpaRepository<EmployerTime,Long> {
-    EmployerTime findByEmployerIdAndJour(long employerId, LocalDate jour);
+    EmployerTime findEmployerTimeByIdAndJour(long id ,LocalDate jour);
 }
 
 

@@ -34,11 +34,11 @@ public class EmployerTime {
 
 
     @Column(name = "heureArrivee")
-   @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS")
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS")
     private LocalDateTime heureArrivee;
 
     @Column(name = "heureDepart")
-  @DateTimeFormat(pattern ="YYYY-MM-dd'T'HH:mm:ss.SSS" )
+    @DateTimeFormat(pattern ="YYYY-MM-dd'T'HH:mm:ss.SSS" )
     private LocalDateTime heureDepart;
 
 
@@ -47,6 +47,6 @@ public class EmployerTime {
     //(fetch = FetchType.LAZY,optional = false)
     //@JoinColumn(name="id")
     @JoinColumn(name = "employer_id")
-   private Employer employer;
+    private Employer employer;
 
 }

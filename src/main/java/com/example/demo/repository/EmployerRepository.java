@@ -8,8 +8,8 @@ import java.util.List;
 import java.util.Optional;
 
 public interface EmployerRepository extends JpaRepository<Employer,Long> {
-   Optional<Employer> findById(Long employerId);
+//   Optional<Employer> findById(long employerId);
    List<Employer> findAllByDepartement(Departement departement);
 
-   Optional<Employer> findByEmployerId(Long employerId);
+   Optional<Employer> findById(long id);
 }

@@ -1,13 +1,12 @@
-package com.example.demo.service;
+package com.example.demo.service.Implement;
 
 import com.example.demo.Utilite.Utils;
 import com.example.demo.dto.EmployerTimeDto;
-import com.example.demo.model.Chomage;
-import com.example.demo.model.Departement;
 import com.example.demo.model.Employer;
 import com.example.demo.model.EmployerTime;
 import com.example.demo.repository.EmployerRepository;
 import com.example.demo.repository.EmployerTimeRepository;
+import com.example.demo.service.Interface.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 
@@ -45,18 +44,22 @@ public class EmployerTimeServiceImpl implements EmployerTimeService {
 
 
     @Override
-    public EmployerTime creer(/*EmployerTime employerTime,*/EmployerTimeDto employerTimeDto) {
-        Employer employer = employerRepository.findByEmployerId(employerTimeDto.getEmployerId())
-                .orElseThrow(() -> new RuntimeException("Employer non trouvé"+ employerTimeDto.getEmployerId()));
-        EmployerTime employerTime = new EmployerTime();
-        employerTime.setEmployer(employer);
-        employerTime.setJour(utils.getCurrenDate());
-        employerTime.setHeureArrivee(utils.getCurrencenDateTime());
+    public EmployerTime creer(EmployerTimeDto employerTimeDto) {
+        Employer employer = employerRepository.findById(employerTimeDto.getEmployerId())
+   .orElseThrow(() -> new RuntimeException("Employer non trouvé"+ employerTimeDto.getEmployerId()));
 
-        var result= employerTimeRepository.save(employerTime);
-        result.getEmployer().setEmployerTimes(null);
-        return  result;
-    }
+//        if (employer.isPresent()) {
+            EmployerTime employerTime = new EmployerTime();
+            employerTime.setEmployer(employer/*.get()*/);
+            employerTime.setJour(utils.getCurrenDate());
+            employerTime.setHeureArrivee(utils.getCurrencenDateTime());
+
+            var result= employerTimeRepository.save(employerTime);
+//        result.getEmployer().setEmployerTimes(null);
+            return  result;
+        }
+       // return null;
+  //
 
     @Override
     public EmployerTime lire(long id) {
@@ -68,6 +71,8 @@ public class EmployerTimeServiceImpl implements EmployerTimeService {
         return employerTimeRepository.findAll();
     }
 
+
+
     /*@Override
     public EmployerTime creerListjustificationDansEmployerTime(EmployerTime employerTime) {
         var justificateEmployerTime=justificateEmployerTimeRepository.findAll();
@@ -76,13 +81,13 @@ public class EmployerTimeServiceImpl implements EmployerTimeService {
     }*/
 
     @Override
-    public Long calculateTotalOccupiedTime(long employerId, LocalDate jour,long congeId) {
+    public Long calculateTotalOccupiedTime(long id, LocalDate jour,long congeId) {
 
         long totalMinuteResponse = 0;
-        Employer employer = employerService.lire(employerId);
+        Employer employer = employerService.lire(id);
         if (employer != null) {
             // Assuming you have a method to get the corresponding Post object for an EmployerTime
-           EmployerTime employerTime = employerTimeRepository.findByEmployerIdAndJour(employerId, jour);
+           EmployerTime employerTime = employerTimeRepository.findEmployerTimeByIdAndJour(id, jour);
             if (employerTime != null) {
                 Duration minuteDeEmployer =employerTime.getHeureArrivee()!=null && employerTime.getHeureDepart()!=null? Duration.between(employerTime.getHeureArrivee(), employerTime.getHeureDepart()) : null;
 
@@ -119,8 +124,8 @@ public class EmployerTimeServiceImpl implements EmployerTimeService {
     }
 
     @Override
-    public EmployerTime updateHeureDepart(long employerId, LocalDate jour) {
-        EmployerTime employerTime = employerTimeRepository.findByEmployerIdAndJour(employerId, jour);
+    public EmployerTime updateHeureDepart(long employerId ,LocalDate jour) {
+        EmployerTime employerTime = employerTimeRepository.findEmployerTimeByIdAndJour(employerId, jour);
 
         if (employerTime != null) {
 

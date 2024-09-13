@@ -4,12 +4,13 @@ import com.example.demo.dto.CreateCongesDto;
 import com.example.demo.dto.UpdateCongesDto;
 import com.example.demo.model.Conges;
 import com.example.demo.repository.CongesRepository;
-import com.example.demo.service.CongesService;
+import com.example.demo.service.Interface.CongesService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin(origins = "*", maxAge=3600)
 @RestController
 @RequestMapping("/conges")
 

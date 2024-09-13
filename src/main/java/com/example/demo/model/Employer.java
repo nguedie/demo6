@@ -20,6 +20,7 @@ import java.util.List;
 @NoArgsConstructor
 @Data
 public class Employer {
+
     @Id
     @GeneratedValue( strategy = GenerationType.IDENTITY)
     private  long id;
@@ -87,11 +88,11 @@ public class Employer {
     @JoinColumn(name = "departement_id")
     private Departement departement;
 
-    @OneToMany(mappedBy = "employer")
-    private List<EmployerTime> employerTimes;
-
-    @OneToMany(mappedBy = "employer")
-    private List<Conges> conges;
+//    @OneToMany(mappedBy = "employer")
+//    private List<EmployerTime> employerTimes;
+//
+//    @OneToMany(mappedBy = "employer")
+//    private List<Conges> conges;
 
 
 
